@@ -2,8 +2,10 @@
  * (C) 2015 TekMonks. All rights reserved.
  * License: See the enclosed LICENSE file.
  */
-const FRONTEND = "https://{{{hostname}}}";
-const BACKEND = "https://{{{hostname}}}:9090";
+const { protocol, host, hostname } = window.location;
+
+const FRONTEND = `${protocol}//${host}`;
+const BACKEND = `${protocol}//${hostname}:9090`;
 const APP_NAME = "xbin";
 const APP_PATH = `${FRONTEND}/apps/${APP_NAME}`;
 const API_PATH = `${BACKEND}/apps/${APP_NAME}`;
