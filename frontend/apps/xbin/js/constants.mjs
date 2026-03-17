@@ -2,10 +2,8 @@
  * (C) 2015 TekMonks. All rights reserved.
  * License: See the enclosed LICENSE file.
  */
-const { protocol, host, hostname } = window.location;
-
-const FRONTEND = `${protocol}//${host}`;
-const BACKEND = `${protocol}//${hostname}:9090`;
+const FRONTEND = new URL(window.location.href).protocol + "//" + new URL(window.location.href).host;
+const BACKEND = new URL(window.location.href).protocol + "//" + new URL(window.location.href).hostname + ":9090";
 const APP_NAME = "xbin";
 const APP_PATH = `${FRONTEND}/apps/${APP_NAME}`;
 const API_PATH = `${BACKEND}/apps/${APP_NAME}`;
