@@ -36,6 +36,7 @@ const API_CHECKFILEEXISTS = _ => API_PATH+"/checkfileexists";
 const API_DOWNLOADFILE_GETSECURID = _ => API_PATH+"/getsecurid";
 const API_DOWNLOADFILE_STATUS = _ => API_PATH+"/getdownloadstatus";
 const API_DOWNLOADFILE_DND = _ => APP_PATH+"/proxiedapis/downloaddnd";
+const API_SETTINGSEDITOR = _ => API_PATH+"/settingseditor";
 let PAGE_DOWNLOADFILE_SHARED = COMPONENT_PATH+"/downloadshared.html", ENCODE_URL = true;
 const LOG = $$.LOG;
 
@@ -43,6 +44,7 @@ const DIALOG_SCROLL_ELEMENT_ID = "notificationscrollpositioner", DIALOG_HOST_ELE
    PROGRESS_TEMPLATE="progressdialog", DEFAULT_SHARE_EXPIRY = 5;
 const DOUBLE_CLICK_DELAY=400, DOWNLOADFILE_REFRESH_INTERVAL = 1000, UPLOAD_ICON = "⇧", DOWNLOAD_ICON = "⇩",
    DOWNLOAD_FILE_OP = "DOWNLOAD_DIRECTION", UPLOAD_FILE_OP = "UPLOAD_DIRECTION", FMDIALOG_ID = "fmdialog";
+const XBIN_FILE_OPEN_EVENT = "xbin_file_open";
 const dialog = element => {
    const orgDialog = monkshu_env.components['dialog-box'];
    const host = element ? file_manager.getHostElement(element) : undefined;
@@ -120,6 +122,8 @@ async function elementConnected(host) {
    file_manager.setData(host.id, data);
 
    if (host.getAttribute("downloadpage")) PAGE_DOWNLOADFILE_SHARED = host.getAttribute("downloadpage");
+   blackboard.registerListener(XBIN_FILE_OPEN_EVENT, eventData => 
+      _openIfAIApp(eventData.path, eventData.element));
 }
 
 function _getIconForEntry(entry) {
@@ -423,9 +427,14 @@ async function editFile(element) {
 
    if (selectedElement.id == "paste") {paste(selectedElement); return;}
 
-   if (!selectedElement.dataset.stats) _showErrordialog();  // not a file, not sure 
-   else if (JSON.parse(selectedElement.dataset.stats).size < MAX_EDIT_SIZE) editFileLoadData(element);  // now it can only be a file 
-   else _showErrorDialog(null, await i18n.get("FileTooBigToEdit"));  // too big to edit inline - download and edit
+   if (_isAIAppEditableFile(selectedPath)) {
+      await _openAIAppEditor(element);
+      return;
+   }
+
+   if (!selectedElement.dataset.stats) _showErrordialog();
+   else if (JSON.parse(selectedElement.dataset.stats).size < MAX_EDIT_SIZE) editFileLoadData(element);
+   else _showErrorDialog(null, await i18n.get("FileTooBigToEdit"));
 }
 
 async function editFileLoadData(element) {
@@ -439,6 +448,56 @@ async function editFileLoadData(element) {
          data: result.filecontents}, element), true);
       if (!resp.result) _showErrordialog();
    }); else _showErrordialog();
+}
+
+async function _openAIAppEditor(element) {
+    const shadowRoot = file_manager.getShadowRootByContainedElement(element),
+        editorBox = shadowRoot.querySelector("div#aiappeditorbox"),
+        informationBox = shadowRoot.querySelector("div#informationbox"),
+        editorComponent = shadowRoot.querySelector("settings-editor#aiappeditor");
+    if ((!editorBox) || (!editorComponent)) {_showErrorDialog(null, "AI app editor is not available."); return false;}
+
+    const newEditor = document.createElement("settings-editor");
+    newEditor.id = "aiappeditor";
+    newEditor.setAttribute("apiurl", API_SETTINGSEDITOR());
+    newEditor.setAttribute("conffile", selectedPath);
+
+    const encryptedKeys = _getHostAttribute(element, "settingseditor-encryptedkeys"),
+        encryptionKey = _getHostAttribute(element, "settingseditor-encryptionkey");
+    if (encryptedKeys) newEditor.setAttribute("encryptedkeys", encryptedKeys);
+    if (encryptionKey) newEditor.setAttribute("encryptionkey", encryptionKey);
+
+    editorComponent.replaceWith(newEditor);
+    informationBox?.classList.remove("visible");
+    editorBox.classList.add("visible");
+    return true;
+}
+
+function closeAIAppEditor(element) {
+    const shadowRoot = file_manager.getShadowRootByContainedElement(element);
+    shadowRoot.querySelector("div#aiappeditorbox")?.classList.remove("visible");
+}
+
+async function saveAIApp(element) {
+    const saved = await monkshu_env.components["settings-editor"].update("aiappeditor");
+    if (saved) closeAIAppEditor(element);
+    else _showErrorDialog(null, "Save failed. Please check values and try again.");
+}
+
+function _openIfAIApp(path, element) {
+   const eventPath = path?.replace(/[\/]+/g,"/");
+   if ((!eventPath) || (!_isAIAppEditableFile(eventPath))) return false;
+
+   selectedPath = eventPath; selectedElement = element || selectedElement;
+   if (!selectedElement) return false;
+
+   _openAIAppEditor(selectedElement);
+   return true;
+}
+
+const _isAIAppEditableFile = path => {
+   const lowerPath = path?.toLowerCase(); if (!lowerPath) return false;
+   return lowerPath.endsWith(".yaml") || lowerPath.endsWith(".yml") || lowerPath.endsWith(".json");
 }
 
 function editFileVisible() {
@@ -683,5 +742,5 @@ const _getHostAttribute = (hostOrElement, attributeName) => {
 export const file_manager = { trueWebComponentMode: true, elementConnected, elementRendered, handleClick, 
    showMenu, deleteFile, editFile, downloadFile, cut, copy, paste, upload, uploadFiles, create, shareFile, 
    renameFile, menuEventDispatcher, isMobile, getDragAndDropDownloadURL, showDownloadProgress, hideNotification,
-   cancelFile, editFileVisible, showHideNotifications, getInfoOnFile, updateFileEntryCommentIfModified, changeToPath }
+   cancelFile, editFileVisible, showHideNotifications, getInfoOnFile, updateFileEntryCommentIfModified, changeToPath , closeAIAppEditor, saveAIApp}
 monkshu_component.register("file-manager", `${COMPONENT_PATH}/file-manager.html`, file_manager);

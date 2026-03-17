@@ -1,0 +1,51 @@
+<!--
+/* 
+* (C) 2026 TekMonks. All rights reserved.
+* License: See enclosed LICENSE file.
+*/
+-->
+<style>
+body {margin: 0;}
+div#settings {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+div.settingsfields {
+    display: flex;
+    flex-direction: row;
+    padding: 1em 0em;
+    align-items: self-start;
+}
+span.fieldname {width: 20em;}
+span.fieldvalue {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+input.fieldinput, textarea.fieldinput {
+    width: calc(100% - 0.9rem);
+    padding: 0.5em;
+    border-radius: 0.5em;
+    border: 0;
+    outline: none;
+    resize: none;
+    background-color: #D9D9D9;
+    font-family: inherit;
+}
+textarea.fieldinput {height: 8em;}
+</style>
+
+<div id="settings">
+    {{#schema}}
+    <div class="settingsfields">
+        <span class="fieldname" id="spanname{{{key}}}">{{name}}</span>
+        <span class="fieldvalue">
+            {{^textarea}}<input id="value{{{key}}}" class="fieldinput" value="{{value}}" 
+                placeholder="Value for {{name}}"/>{{/textarea}}
+            {{#textarea}}<textarea id="value{{{key}}}" class="fieldinput" 
+                placeholder="Value for {{name}}">{{value}}</textarea>{{/textarea}}
+        </span>
+    </div>
+    {{/schema}}
+</div>
