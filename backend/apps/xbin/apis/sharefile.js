@@ -36,4 +36,4 @@ async function deleteSharesForID(id) {
 	return await db.runTransaction(deleteDrops);
 }
 
-const validateRequest = jsonReq => (jsonReq && (jsonReq.path || (jsonReq.id && jsonReq.expiry)));
+const validateRequest = jsonReq => (jsonReq && (jsonReq.path || (jsonReq.id && jsonReq.expiry != null)));
