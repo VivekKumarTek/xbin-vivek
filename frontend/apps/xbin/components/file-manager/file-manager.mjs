@@ -473,10 +473,10 @@ function getDragAndDropDownloadURL(path, element) {
 const showDownloadProgress = (path, element) => _showDownloadProgress(element, path, element["data-reqid"]);
 
 function cut(element) { selectedCutPath = selectedPath; selectedCutCopyElement = selectedElement.cloneNode(); 
-   file_manager.reload(file_manager.getHostElementID(element)); }
+   router.reload(!ENCODE_URL, false); }
 
 function copy(element) { selectedCopyPath = selectedPath; selectedCutCopyElement = selectedElement.cloneNode(); 
-   file_manager.reload(file_manager.getHostElementID(element)); }
+   router.reload(!ENCODE_URL, false); }
 
 async function paste(element) {
    const _copyRequestedToItsOwnSubdirectory = (from, to) => {const pathSplits = to.split("/");
