@@ -17,12 +17,12 @@ exports.doService = async (jsonReq, _, headers) => {
 			if (!await cms.isSecure(headers, fullpath, jsonReq.extraInfo)) {LOG.error(`Path security validation failure: ${jsonReq.path}`); return CONSTANTS.FALSE_RESULT;}
 			if (!await uploadfile.isFileConsistentOnDisk(fullpath)) {LOG.error(`Path is not consistent on the disk ${jsonReq.path}`); return CONSTANTS.FALSE_RESULT;}
 
-			const expiry = Date.now()+((jsonReq.expiry||XBIN_CONSTANTS.CONF.DEFAULT_SHARED_FILE_EXPIRY)*86400000);	
+			const expiry = Date.now()+_getExpiryMillis(jsonReq.expiry||XBIN_CONSTANTS.CONF.DEFAULT_SHARED_FILE_EXPIRY, jsonReq.expiry_unit||"days");
 			const id = crypto.createHash("sha512").update(fullpath+expiry+(Math.random()*(1000000 - 1)+1)).digest("hex");
 			await db.runCmd("INSERT INTO shares(fullpath, id, expiry) VALUES (?,?,?)", [fullpath,id,expiry]);
 			return {result: true, id};
 		} else {	// update expiry
-			if (jsonReq.expiry != 0) await db.runCmd("UPDATE shares SET expiry = ? WHERE id = ?", [Date.now()+(jsonReq.expiry*86400000),jsonReq.id]);
+			if (jsonReq.expiry != 0) await db.runCmd("UPDATE shares SET expiry = ? WHERE id = ?", [Date.now()+_getExpiryMillis(jsonReq.expiry, jsonReq.expiry_unit||"days"),jsonReq.id]);
 			else await db.runCmd("DELETE FROM shares WHERE id = ?", [jsonReq.id]);
 			return {result: true, id: jsonReq.id};
 		}
@@ -34,6 +34,13 @@ async function deleteSharesForID(id) {
 		{cmd:"DELETE FROM quotas WHERE id = ?", params: [id]}];
 
 	return await db.runTransaction(deleteDrops);
+}
+
+const _getExpiryMillis = (value, unit="days") => {
+	const n = Number(value), unitNormalized = unit.toLowerCase();
+	if (unitNormalized == "minutes") return n * 60000;
+	if (unitNormalized == "hours") return n * 3600000;
+	return n * 86400000;
 }
 
 const validateRequest = jsonReq => (jsonReq && (jsonReq.path || (jsonReq.id && jsonReq.expiry != null)));

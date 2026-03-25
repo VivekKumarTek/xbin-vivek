@@ -36,13 +36,56 @@ span#expiryspan {
     font-size: smaller;
     margin-bottom: 20px;
     padding-left: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
 }
 
-span#expiryspan > input#expiry {
-    width: 2.5em;
-    border-style: none;
+span#expirycontrols {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 0.85em 1em;
+    border-radius: 10px;
+    background-color: #F0F8FF;
+    box-shadow: 0 0 0px 1000px #F0F8FF inset;
+    color: #4788C7;
+}
+
+span#expirycontrols > span {
+    font-weight: 500;
+}
+
+span#expirycontrols > input#expiry_value {
+    width: 4.2em;
+    border: 1px solid rgba(71, 136, 199, 0.28);
+    border-radius: 10px;
     outline: none;
     font-family: 'Serif';
+    text-align: center;
+    padding: 0.45em 0.4em;
+    background: #ffffff;
+    color: #4788C7;
+    box-sizing: border-box;
+}
+
+span#expirycontrols > select#expiry_unit {
+    border: 1px solid rgba(71, 136, 199, 0.28);
+    border-radius: 10px;
+    outline: none;
+    font-family: 'Serif';
+    background: #ffffff;
+    cursor: pointer;
+    color: #4788C7;
+    padding: 0.45em 0.7em;
+    min-width: 7.5em;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+body {width: auto}
 }
 
 span#copied {
@@ -63,6 +106,16 @@ span#copied {
         selector.querySelector('span#copied').style.opacity=1;
         setTimeout(_=>selector.querySelector('span#copied').style.opacity=0, 1300);" src="{{dialogpath}}/img/copy.svg">
 </span>
-<span id="expiryspan">Share for <input id="expiry" type="number" value="{{shareDuration}}" min="1" onkeyup="if (this.value<0) this.value=this.value*-1;"> days</span>
+<span id="expiryspan">
+    <span id="expirycontrols">
+        <span>Share for</span>
+        <input id="expiry_value" type="number" value="{{shareDuration}}" min="1" step="1" inputmode="numeric" oninput="if (this.value && this.value < 1) this.value = 1;">
+        <select id="expiry_unit">
+        <option value="minutes" {{minutesSelected}}>Minutes</option>
+        <option value="hours"   {{hoursSelected}}>Hours</option>
+        <option value="days"    {{daysSelected}}>Days</option>
+        </select>
+    </span>
+</span>
 <span id="copied">{{i18n.Copied}}</span>
 </div>
