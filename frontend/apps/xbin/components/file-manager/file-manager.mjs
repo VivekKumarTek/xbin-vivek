@@ -575,7 +575,7 @@ function renameFile(element) {
 async function shareFile(element) {
    const paths = selectedPath.split("/"), name = paths[paths.length-1];
    const resp = await apiman.rest(API_SHAREFILE(), "GET", _addExtraInfo({path: selectedPath, expiry: SHARE_DURATION, expiry_unit: DEFAULT_SHARE_EXPIRY_UNIT}, element), true);
-   const downloadlink = resp?`${PAGE_DOWNLOADFILE_SHARED}?id=${resp.id}&name=${name}&apipath=${API_PATH}`:null;
+   const downloadlink = resp?`${PAGE_DOWNLOADFILE_SHARED}?${new URLSearchParams({id: resp.id, name, apipath: API_PATH}).toString()}`:null;
    if (!resp || !resp.result) _showErrorDialog(); else dialog(element).showDialog( 
       `${DIALOGS_PATH}/sharefile.html`, true, true, 
       { link: ENCODE_URL ? router.encodeURL(downloadlink):downloadlink, id: resp.id, 
