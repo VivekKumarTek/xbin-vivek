@@ -43,4 +43,4 @@ const _getExpiryMillis = (value, unit="days") => {
 	return n * 86400000;
 }
 
-const validateRequest = jsonReq => (jsonReq && (jsonReq.path || (jsonReq.id && jsonReq.expiry)));
+const validateRequest = jsonReq => (jsonReq && (jsonReq.path || (jsonReq.id && jsonReq.expiry != null)));
