@@ -169,8 +169,8 @@ function handleClick(element, path, isDirectory, fromClickEvent, nomenu, clickEv
 function _fileListingEntrySelected(containedElement, stats) {
    const informationbox = file_manager.getShadowRootByContainedElement(containedElement).querySelector("div#informationbox");
    if (stats.size) stats.sizeLocale = parseInt(stats.size).toLocaleString(); 
-   if (stats.birthtime) stats.birthTimestampLocale = new Date(stats.birthtime).toLocaleString(); 
-   if (stats.mtime) stats.modifiedTimestampLocale = new Date(stats.mtime).toLocaleString(); 
+   if (stats.birthtimeMs) stats.birthTimestampLocale = new Date(stats.birthtimeMs).toLocaleString(); 
+   if (stats.mtimeMs) stats.modifiedTimestampLocale = new Date(stats.mtimeMs).toLocaleString(); 
    const arrayForBreadcrumbs = selectedPath.trim().replace(/^\/+/, "").split("/").slice(0, -1); arrayForBreadcrumbs.unshift("Home");
    stats.path = selectedPath; stats.pathBreadcrumbs = arrayForBreadcrumbs.join(" > "); 
    if (!stats.name) stats.name = containedElement.innerText;
@@ -438,6 +438,7 @@ async function editFileLoadData(element) {
       const resp = await apiman.rest(API_OPERATEFILE(), "POST", _addExtraInfo({path: selectedPath, op: "write", 
          data: result.filecontents}, element), true);
       if (!resp.result) _showErrordialog();
+      else router.reload(!ENCODE_URL, false);
    }); else _showErrordialog();
 }
 

@@ -165,9 +165,9 @@ exports.updateFileStats = async function (fullpathOrRequestHeaders, remotepath, 
 	if (commentin) clusterMemory.files_stats[fullpath].comment = commentin;
 
 	if (transferFinished) {
-		if (!clusterMemory.files_stats[fullpath].birthtimeMs) {	// refresh stats if empty
+		if (!clusterMemory.files_stats[fullpath].birthtimeMs || dataLengthWritten !== undefined) {
 			const stats = await fspromises.stat(fullpath), oldstats = clusterMemory.files_stats[fullpath];
-			clusterMemory.files_stats[fullpath] = {...stats, ...oldstats, disk_size: stats.size};	
+        	clusterMemory.files_stats[fullpath] = {...oldstats, ...stats, disk_size: stats.size};
 		}
 		await fspromises.writeFile(metaPath, JSON.stringify(clusterMemory.files_stats[fullpath]));
 		if (dataLengthWritten) clusterMemory.files_stats[fullpath].byteswritten = 0; 	// we updated due to a write and have finished uploading
