@@ -1,0 +1,144 @@
+<svg width="100%" viewBox="0 0 540 580" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="head-g" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#E2E6EA"></stop>
+    <stop offset="100%" stop-color="#C8CDD4"></stop>
+  </linearGradient>
+  <linearGradient id="body-g" x1="0.2" y1="0" x2="0.8" y2="1">
+    <stop offset="0%" stop-color="#0E1C2E"></stop>
+    <stop offset="100%" stop-color="#091420"></stop>
+  </linearGradient>
+  <linearGradient id="visor-g" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#1A6A8A"></stop>
+    <stop offset="100%" stop-color="#0E4F6B"></stop>
+  </linearGradient>
+  <linearGradient id="drawer-g" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#1E7A9A"></stop>
+    <stop offset="100%" stop-color="#145F7A"></stop>
+  </linearGradient>
+  <linearGradient id="file-blue" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#FFFFFF"></stop>
+    <stop offset="100%" stop-color="#EAF4FF"></stop>
+  </linearGradient>
+  <linearGradient id="file-teal" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#FFFFFF"></stop>
+    <stop offset="100%" stop-color="#E1F5EE"></stop>
+  </linearGradient>
+  <linearGradient id="file-amber" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#FFFFFF"></stop>
+    <stop offset="100%" stop-color="#FAEEDA"></stop>
+  </linearGradient>
+</defs>
+
+<!-- ===================== JUGGLING FILES ===================== -->
+<g transform="rotate(-18 128 130)">
+  <rect x="100" y="100" width="56" height="70" rx="7" fill="url(#file-blue)" stroke="#85B7EB" stroke-width="1.5"></rect>
+  <path d="M132 100 L156 100 L156 124 L132 124 Z" fill="#EAF4FF"></path>
+  <path d="M132 100 L156 124 L132 124 Z" fill="#B5D4F4"></path>
+  <rect x="108" y="132" width="30" height="3" rx="1.5" fill="#B5D4F4"></rect>
+  <rect x="108" y="139" width="38" height="3" rx="1.5" fill="#B5D4F4"></rect>
+  <rect x="108" y="146" width="24" height="3" rx="1.5" fill="#B5D4F4"></rect>
+  <rect x="108" y="153" width="34" height="3" rx="1.5" fill="#B5D4F4"></rect>
+  <rect x="108" y="95" width="18" height="8" rx="3" fill="#378ADD"></rect>
+</g>
+
+<g transform="rotate(22 368 98)">
+  <rect x="340" y="70" width="56" height="70" rx="7" fill="url(#file-teal)" stroke="#5DCAA5" stroke-width="1.5"></rect>
+  <path d="M372 70 L396 70 L396 94 L372 94 Z" fill="#E1F5EE"></path>
+  <path d="M372 70 L396 94 L372 94 Z" fill="#9FE1CB"></path>
+  <rect x="348" y="102" width="32" height="3" rx="1.5" fill="#9FE1CB"></rect>
+  <rect x="348" y="109" width="24" height="3" rx="1.5" fill="#9FE1CB"></rect>
+  <rect x="348" y="116" width="36" height="3" rx="1.5" fill="#9FE1CB"></rect>
+  <rect x="348" y="123" width="20" height="3" rx="1.5" fill="#9FE1CB"></rect>
+  <rect x="348" y="65" width="18" height="8" rx="3" fill="#1D9E75"></rect>
+</g>
+
+<g transform="rotate(8 255 52)">
+  <rect x="228" y="28" width="56" height="70" rx="7" fill="url(#file-amber)" stroke="#FAC775" stroke-width="1.5"></rect>
+  <path d="M260 28 L284 28 L284 52 L260 52 Z" fill="#FAEEDA"></path>
+  <path d="M260 28 L284 52 L260 52 Z" fill="#FAC775"></path>
+  <rect x="236" y="60" width="36" height="3" rx="1.5" fill="#FAC775"></rect>
+  <rect x="236" y="67" width="28" height="3" rx="1.5" fill="#FAC775"></rect>
+  <rect x="236" y="74" width="40" height="3" rx="1.5" fill="#FAC775"></rect>
+  <rect x="236" y="81" width="22" height="3" rx="1.5" fill="#FAC775"></rect>
+  <rect x="236" y="23" width="18" height="8" rx="3" fill="#EF9F27"></rect>
+</g>
+
+<g transform="rotate(30 440 240)">
+  <rect x="418" y="210" width="50" height="64" rx="7" fill="#FBEAF0" stroke="#ED93B1" stroke-width="1.5"></rect>
+  <path d="M446 210 L468 210 L468 232 L446 232 Z" fill="#FBEAF0"></path>
+  <path d="M446 210 L468 232 L446 232 Z" fill="#F4C0D1"></path>
+  <rect x="425" y="240" width="28" height="3" rx="1.5" fill="#F4C0D1"></rect>
+  <rect x="425" y="247" width="34" height="3" rx="1.5" fill="#F4C0D1"></rect>
+  <rect x="425" y="254" width="20" height="3" rx="1.5" fill="#F4C0D1"></rect>
+  <rect x="425" y="205" width="16" height="8" rx="3" fill="#D4537E"></rect>
+</g>
+
+<g transform="rotate(-25 72 235)">
+  <rect x="50" y="210" width="50" height="64" rx="7" fill="#EEEDFE" stroke="#AFA9EC" stroke-width="1.5"></rect>
+  <path d="M76 210 L100 210 L100 232 L76 232 Z" fill="#EEEDFE"></path>
+  <path d="M76 210 L100 232 L76 232 Z" fill="#CECBF6"></path>
+  <rect x="57" y="240" width="30" height="3" rx="1.5" fill="#CECBF6"></rect>
+  <rect x="57" y="247" width="22" height="3" rx="1.5" fill="#CECBF6"></rect>
+  <rect x="57" y="254" width="36" height="3" rx="1.5" fill="#CECBF6"></rect>
+  <rect x="57" y="205" width="16" height="8" rx="3" fill="#7F77DD"></rect>
+</g>
+
+<!-- ===================== ARMS ===================== -->
+<path d="M188 310 Q155 280 125 255 Q108 240 100 228" fill="none" stroke="#C8CDD4" stroke-width="30" stroke-linecap="round"></path>
+<path d="M188 310 Q155 280 125 255 Q108 240 100 228" fill="none" stroke="#D4D9E0" stroke-width="24" stroke-linecap="round"></path>
+<circle cx="100" cy="225" r="18" fill="#C8CDD4"></circle>
+<circle cx="100" cy="225" r="10" fill="#D4D9E0"></circle>
+
+<path d="M312 310 Q348 278 382 250 Q400 235 418 222" fill="none" stroke="#C8CDD4" stroke-width="30" stroke-linecap="round"></path>
+<path d="M312 310 Q348 278 382 250 Q400 235 418 222" fill="none" stroke="#D4D9E0" stroke-width="24" stroke-linecap="round"></path>
+<circle cx="420" cy="220" r="18" fill="#C8CDD4"></circle>
+<circle cx="420" cy="220" r="10" fill="#D4D9E0"></circle>
+
+<!-- ===================== BODY ===================== -->
+<path d="M178 305 Q165 270 172 245 Q182 215 255 210 Q328 215 338 245 Q345 270 332 305 Q318 385 255 428 Q192 385 178 305 Z" fill="url(#body-g)"></path>
+
+<rect x="210" y="290" width="90" height="34" rx="7" fill="url(#drawer-g)"></rect>
+<rect x="236" y="304" width="38" height="7" rx="3.5" fill="#0A3D52"></rect>
+<rect x="216" y="284" width="16" height="8" rx="3" fill="#03B3FF"></rect>
+<rect x="236" y="284" width="13" height="8" rx="3" fill="#1D9E75" opacity="0.9"></rect>
+<rect x="253" y="284" width="14" height="8" rx="3" fill="#EF9F27" opacity="0.9"></rect>
+
+<rect x="210" y="332" width="90" height="30" rx="7" fill="url(#drawer-g)" opacity="0.82"></rect>
+<rect x="236" y="344" width="38" height="7" rx="3.5" fill="#0A3D52"></rect>
+<rect x="216" y="327" width="14" height="7" rx="3" fill="#D4537E" opacity="0.85"></rect>
+<rect x="234" y="327" width="16" height="7" rx="3" fill="#03B3FF" opacity="0.75"></rect>
+
+<!-- ===================== NECK ===================== -->
+<rect x="232" y="200" width="46" height="16" rx="7" fill="#BFC5CE"></rect>
+
+<!-- ===================== HEAD ===================== -->
+<circle cx="255" cy="148" r="112" fill="url(#head-g)"></circle>
+
+<!-- VISOR -->
+<rect x="155" y="150" width="200" height="74" rx="37" fill="url(#visor-g)"></rect>
+
+<!-- EYES -->
+<ellipse cx="213" cy="187" rx="31" ry="23" fill="white"></ellipse>
+<ellipse cx="297" cy="187" rx="31" ry="23" fill="white"></ellipse>
+<circle cx="213" cy="187" r="12" fill="#03B3FF" opacity="0.2"></circle>
+<circle cx="297" cy="187" r="12" fill="#03B3FF" opacity="0.2"></circle>
+<circle cx="213" cy="187" r="7" fill="#0E4F6B"></circle>
+<circle cx="297" cy="187" r="7" fill="#0E4F6B"></circle>
+<circle cx="206" cy="181" r="4.5" fill="white" opacity="0.75"></circle>
+<circle cx="290" cy="181" r="4.5" fill="white" opacity="0.75"></circle>
+
+<!-- ===================== xbin — single text element, centered, tonal ===================== -->
+<text x="255" y="102" font-family="'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="800" fill="#1A6A8A" opacity="0.32" text-anchor="middle" letter-spacing="1">xbin</text>
+
+<!-- Ear bumps -->
+<circle cx="143" cy="162" r="8" fill="#C0C6CF" stroke="#B0B8C4" stroke-width="1"></circle>
+<circle cx="367" cy="162" r="8" fill="#C0C6CF" stroke="#B0B8C4" stroke-width="1"></circle>
+
+<!-- ===================== LEGS ===================== -->
+<rect x="218" y="422" width="24" height="30" rx="8" fill="#C0C6CF" stroke="#B0B8C4" stroke-width="1"></rect>
+<rect x="268" y="422" width="24" height="30" rx="8" fill="#C0C6CF" stroke="#B0B8C4" stroke-width="1"></rect>
+<rect x="208" y="444" width="44" height="14" rx="7" fill="#B0B8C4"></rect>
+<rect x="258" y="444" width="44" height="14" rx="7" fill="#B0B8C4"></rect>
+
+</svg>
